@@ -1,0 +1,54 @@
+:root {
+  /* 颜色系统 - 专业音频设备配色 */
+  --color-studio-bg: #0f172a;
+  --color-studio-panel: #1e293b;
+  --color-studio-accent: #334155;
+  --color-studio-highlight: #475569;
+  
+  /* 和声声部颜色 */
+  --color-melody: #3b82f6;    /* 蓝色 - 主旋律 */
+  --color-harmony-3rd: #10b981; /* 绿色 - 三度和声 */
+  --color-harmony-5th: #f59e0b; /* 琥珀色 - 五度和声 */
+  --color-harmony-7th: #8b5cf6; /* 紫色 - 七度和声 */
+  --color-effect: #ec4899;     /* 粉色 - 效果 */
+  
+  /* 控件尺寸 */
+  --knob-size: 60px;
+  --fader-width: 40px;
+  --fader-height: 200px;
+  --led-size: 12px;
+  
+  /* 动画时间 */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  
+  /* 阴影系统 */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-knob: inset 2px 2px 5px rgba(0, 0, 0, 0.5), 
+                 inset -2px -2px 5px rgba(255, 255, 255, 0.1);
+  
+  /* 渐变 */
+  --gradient-studio: linear-gradient(135deg, var(--color-studio-bg) 0%, var(--color-studio-panel) 100%);
+  --gradient-knob: linear-gradient(145deg, #2d3748, #1a202c);
+  --gradient-led: linear-gradient(135deg, #10b981, #0ea5e9);
+}
+
+/* 暗色主题 */
+.dark {
+  --color-studio-bg: #0a0f1a;
+  --color-studio-panel: #141b2d;
+}
+
+/* 霓虹主题 */
+.theme-neon {
+  --color-melody: #00ffcc;
+  --color-harmony-3rd: #ff00ff;
+  --color-harmony-5th: #ffff00;
+  --color-studio-bg: #000000;
+  --color-studio-panel: #1a0033;
+}

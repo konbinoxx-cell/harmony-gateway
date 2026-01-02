@@ -1,0 +1,364 @@
+.magic-effect-container {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.magic-effect-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #ec4899, transparent);
+}
+
+.module-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.module-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.title-icon {
+  font-size: 2rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+.module-description {
+  color: #94a3b8;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 控制面板 */
+.magic-control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mode-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mode-button {
+  min-width: 120px;
+}
+
+.magic-button {
+  min-width: 180px;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.magic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+}
+
+.magic-button.active {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* 可视化区域 */
+.visualization-section {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.visualizer-info {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.info-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* 效果参数 */
+.effect-parameters {
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  overflow: hidden;
+}
+
+.parameters-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.knob-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 32px;
+  justify-items: center;
+}
+
+/* A/B对比 */
+.comparison-section {
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.comparison-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.comparison-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.comparison-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.comparison-item.before {
+  border: 2px solid #3b82f6;
+}
+
+.comparison-item.after {
+  border: 2px solid #8b5cf6;
+}
+
+.comparison-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  text-align: center;
+}
+
+.comparison-bar {
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 1s ease-in-out;
+}
+
+.comparison-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.comparison-arrow {
+  font-size: 2rem;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.comparison-tip {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  padding: 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* 操作指南 */
+.instruction-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.instruction-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.instruction-step:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content strong {
+  display: block;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+
+.step-content p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* 状态指示 */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.status-dot.connected {
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.status-dot.disconnected {
+  background: #ef4444;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-text {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+/* 动画 */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4); }
+  50% { box-shadow: 0 10px 35px rgba(139, 92, 246, 0.6), 0 0 50px rgba(236, 72, 153, 0.3); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .magic-effect-container {
+    padding: 16px;
+  }
+  
+  .module-title {
+    font-size: 1.5rem;
+  }
+  
+  .mode-selector {
+    flex-direction: column;
+  }
+  
+  .mode-button,
+  .magic-button {
+    width: 100%;
+  }
+  
+  .comparison-grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .comparison-arrow {
+    transform: rotate(90deg);
+  }
+  
+  .knob-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
