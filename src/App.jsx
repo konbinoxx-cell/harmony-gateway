@@ -1,54 +1,109 @@
-﻿import React from "react"
+﻿import { useEffect, useRef, useState } from "react";
+
 export default function App() {
+  const audioCtxRef = useRef(null);
+  const analyserRef = useRef(null);
+  const bufferRef = useRef(null);
+
+  const [running, setRunning] = useState(false);
+  const [frequency, setFrequency] = useState(null);
+
+  async function startAudio() {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+    const audioCtx = new AudioContext();
+    const source = audioCtx.createMediaStreamSource(stream);
+    const analyser = audioCtx.createAnalyser();
+
+    analyser.fftSize = 2048;
+
+    const buffer = new Float32Array(analyser.fftSize);
+
+    source.connect(analyser);
+
+    audioCtxRef.current = audioCtx;
+    analyserRef.current = analyser;
+    bufferRef.current = buffer;
+
+    setRunning(true);
+    detect();
+  }
+
+  function detect() {
+    if (!analyserRef.current) return;
+
+    analyserRef.current.getFloatTimeDomainData(bufferRef.current);
+
+    const freq = autoCorrelate(bufferRef.current, audioCtxRef.current.sampleRate);
+    if (freq !== -1) setFrequency(freq);
+
+    requestAnimationFrame(detect);
+  }
+
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "#0f172a",
-      color: "white",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      fontFamily: "sans-serif",
-      textAlign: "center",
-      padding: "20px"
-    }}>
-      <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-        🎵 Harmony Gateway
-      </h1>
-      <p style={{ fontSize: "1.2rem", marginBottom: "2rem", opacity: 0.8 }}>
-        和声训练系统 - 部署测试版
-      </p>
-      <button 
-        onClick={() => alert("部署成功！准备添加音频功能")}
-        style={{
-          background: "#3b82f6",
-          color: "white",
-          border: "none",
-          padding: "12px 24px",
-          fontSize: "1rem",
-          borderRadius: "8px",
-          cursor: "pointer",
-          marginBottom: "2rem"
-        }}
-      >
-        点击测试
-      </button>
-      <div style={{ 
-        background: "rgba(255,255,255,0.1)", 
-        padding: "20px", 
-        borderRadius: "8px",
-        maxWidth: "500px"
-      }}>
-        <h3>部署状态</h3>
-        <p>✓ React 应用运行正常</p>
-        <p>✓ 准备部署到 Cloudflare Pages</p>
-        <p>⏳ 音频功能即将添加</p>
-      </div>
-      <footer style={{ marginTop: "3rem", opacity: 0.6, fontSize: "0.9rem" }}>
-        <p>为教会诗班训练打造的专用工具</p>
-        <p>cloudflare.pages.dev 部署测试</p>
-      </footer>
+    <div style={{ padding: 32, fontFamily: "sans-serif" }}>
+      <h1>🎵 Harmony Gateway</h1>
+
+      {!running && (
+        <button onClick={startAudio} style={{ fontSize: 20 }}>
+          🎤 启动音频引擎
+        </button>
+      )}
+
+      {running && (
+        <>
+          <p>音频引擎运行中</p>
+          <p>
+            当前频率：
+            <strong>
+              {frequency ? frequency.toFixed(1) + " Hz" : "—"}
+            </strong>
+          </p>
+        </>
+      )}
     </div>
-  )
+  );
+}
+
+/**
+ * Autocorrelation pitch detection
+ * 返回 Hz 或 -1
+ */
+function autoCorrelate(buffer, sampleRate) {
+  let SIZE = buffer.length;
+  let rms = 0;
+
+  for (let i = 0; i < SIZE; i++) {
+    let val = buffer[i];
+    rms += val * val;
+  }
+  rms = Math.sqrt(rms / SIZE);
+  if (rms < 0.01) return -1; // 静音过滤
+
+  let r1 = 0, r2 = SIZE - 1;
+  while (buffer[r1] < 0.01 && r1 < SIZE / 2) r1++;
+  while (buffer[r2] < 0.01 && r2 > SIZE / 2) r2--;
+
+  buffer = buffer.slice(r1, r2);
+  SIZE = buffer.length;
+
+  let c = new Array(SIZE).fill(0);
+  for (let i = 0; i < SIZE; i++) {
+    for (let j = 0; j < SIZE - i; j++) {
+      c[i] += buffer[j] * buffer[j + i];
+    }
+  }
+
+  let d = 0;
+  while (c[d] > c[d + 1]) d++;
+  let maxval = -1, maxpos = -1;
+  for (let i = d; i < SIZE; i++) {
+    if (c[i] > maxval) {
+      maxval = c[i];
+      maxpos = i;
+    }
+  }
+
+  let T0 = maxpos;
+  return sampleRate / T0;
 }
