@@ -1,0 +1,119 @@
+﻿import React from "react"
+
+export default function App() {
+  const handleClick = () => {
+    alert("React 应用运行成功！准备添加音频功能...")
+  }
+
+  return (
+    <div style={styles.container}>
+      <h1 style={styles.title}>🎵 Harmony Gateway</h1>
+      <p style={styles.subtitle}>和声训练系统 - 基础测试</p>
+      
+      <div style={styles.card}>
+        <h2 style={styles.cardTitle}>系统状态</h2>
+        <div style={styles.statusGrid}>
+          <div style={styles.statusItem}>
+            <div style={styles.statusDot}></div>
+            <span>React 18 ✓</span>
+          </div>
+          <div style={styles.statusItem}>
+            <div style={{...styles.statusDot, background: "#f59e0b"}}></div>
+            <span>Vite ✓</span>
+          </div>
+          <div style={styles.statusItem}>
+            <div style={{...styles.statusDot, background: "#8b5cf6"}}></div>
+            <span>JSX ✓</span>
+          </div>
+        </div>
+        
+        <button 
+          onClick={handleClick}
+          style={styles.button}
+        >
+          点击测试
+        </button>
+      </div>
+      
+      <footer style={styles.footer}>
+        <p>为教会诗班训练打造的专用工具</p>
+      </footer>
+    </div>
+  )
+}
+
+const styles = {
+  container: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+    color: "white",
+    padding: "20px",
+    fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif"
+  },
+  title: {
+    fontSize: "3rem",
+    textAlign: "center",
+    marginBottom: "1rem",
+    background: "linear-gradient(90deg, #3b82f6, #8b5cf6)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent"
+  },
+  subtitle: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    opacity: 0.8,
+    marginBottom: "2rem"
+  },
+  card: {
+    maxWidth: "600px",
+    margin: "0 auto",
+    background: "rgba(255, 255, 255, 0.1)",
+    padding: "30px",
+    borderRadius: "12px",
+    backdropFilter: "blur(10px)"
+  },
+  cardTitle: {
+    textAlign: "center",
+    marginBottom: "20px",
+    fontSize: "1.5rem"
+  },
+  statusGrid: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+    marginBottom: "30px",
+    flexWrap: "wrap"
+  },
+  statusItem: {
+    padding: "15px",
+    background: "rgba(255, 255, 255, 0.05)",
+    borderRadius: "8px",
+    minWidth: "120px",
+    textAlign: "center"
+  },
+  statusDot: {
+    width: "10px",
+    height: "10px",
+    background: "#10b981",
+    borderRadius: "50%",
+    margin: "0 auto 10px"
+  },
+  button: {
+    display: "block",
+    margin: "0 auto",
+    background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+    color: "white",
+    border: "none",
+    padding: "12px 24px",
+    fontSize: "1rem",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "transform 0.2s"
+  },
+  footer: {
+    textAlign: "center",
+    marginTop: "40px",
+    opacity: 0.6,
+    fontSize: "0.9rem"
+  }
+}

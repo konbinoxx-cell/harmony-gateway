@@ -1,0 +1,13 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义样式 */
+:root {
+  --harmony-blue: #3b82f6;
+  --harmony-green: #10b981;
+}
+
+body {
+  margin: 0;
+}

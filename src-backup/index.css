@@ -1,0 +1,72 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义基础样式 */
+@layer base {
+  :root {
+    --color-melody: #3b82f6;
+    --color-harmony-3rd: #10b981;
+    --color-harmony-5th: #f59e0b;
+  }
+
+  body {
+    margin: 0;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.8);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.8);
+  }
+}
+
+/* 自定义组件类 */
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-sm bg-white/5 border border-white/10;
+  }
+
+  .audio-knob {
+    @apply rounded-full bg-gradient-to-br from-gray-800 to-gray-900 
+           shadow-lg border border-gray-700/50;
+  }
+
+  .harmony-button {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-300
+           hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+  }
+}
+
+/* 自定义工具类 */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
